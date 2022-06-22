@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+{% for post in posts %}
+	  	<div class="pos_cont">
+		   <div class="cont">
+		   		<div class="image">
+		   			<img src="{{ post.author.profile.image.url }}" class="imaged">
+		   		</div>
+		   		<div>
+		   			<h3 >
+						<a href="{% url 'post-detail' post.id %}" class="pos_title">
+		   					{{ post.title }} 
+		   				</a>
+					</h3>
+		  			<div class="cont">
+		  				<div class="pre_author author">
+		  					<p>By:</p>
+		  					<p>Posted on:</p>
+		  				</div>
+		  				<div class="author">
+							<a href="{% url 'user-posts' post.author.username %}" style="color: blue;">
+								<p>
+									{{ post.author }}
+								</p>
+							</a>
+		  					<p>{{ post.date_posted|date:"F d, Y" }}</p>
+		  				</div>
+		  			</div>
+		   		</div>
+		   </div>
+		  	<div style="padding: 15px; width: 100%; text-align: justify;">
+		  		<pre >
+		  			<p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 400px;">
+						  {{ post.content }}
+					</p>
+		  		</pre>
+		  	</div>
+		</div>
+	  {% endfor %}
+	  <br><br>
+{% endblock content %}

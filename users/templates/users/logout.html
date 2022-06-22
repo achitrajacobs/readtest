@@ -1,0 +1,10 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div id="logoutTitle">
+		It is sad to see you going!
+	</div>
+	 	<div id="signInBtn">
+	 		<a href="{% url 'login' %}" style="text-decoration: none; color: honeydew"> Let's get back in 👉</a>
+	 	</div>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends "blog/base.html" %}
+{% block content %}
+	<div style="background-color: lavender; width: 97%; margin: 0 auto; border-radius: 5px;">
+	   <div class="cont" style="margin: 3px">
+	   		<div class="image">
+	   			<img src="{{ object.author.profile.image.url }}">
+	   		</div>
+	   		<div>
+	   			<h3>{{ object.title }}</h3>
+				<div class="cont">
+					<div class="pre_author author">
+						<p>By:</p>
+						<p>Posted on:</p>
+					</div>
+					<div class="author">
+						<p>{{ post.author }}</p>
+						<p>{{ post.date_posted|date:"F d, Y" }}</p>
+					</div>
+				</div>
+						{% if object.author == user %}
+							<a href="{% url 'post-update' object.id %}" class="update akn">Update</a>
+							  &nbsp;&nbsp;
+							<a href="{% url 'post-delete' object.id %}" class="warning akn">Delete</a>
+						{% endif %}
+	  			
+	   		</div>
+	   </div>
+	  	<div class="pos_cont">
+			<div style="padding: 15px; width: 100%; text-align: justify;">
+				<pre style="text-overflow: clip; overflow: hidden; white-space: pre-wrap;">
+					<p>{{ post.content}}</p>
+				</pre>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+	   <p>I hate how much I love you</p>
+{% endblock content %}

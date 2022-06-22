@@ -1,0 +1,60 @@
+
+{% extends "blog/base.html" %}
+{% block content %}
+<h3 style="color: rgb(105, 27, 116); margin-left: 30px;">
+    Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})
+</h3>
+	  {% for post in posts %}
+      <div class="pos_cont">
+		   <div class="cont">
+		   		<div class="image">
+		   			<img src="{{ post.author.profile.image.url }}" class="imaged">
+		   		</div>
+		   		<div>
+		   			<h3 style="margin-left: 15px;">
+						<a href="{% url 'post-detail' post.id %}" class="pos_title">
+		   					{{ post.title }} 
+		   				</a>
+					</h3>
+		  			<div class="cont">
+		  				<div class="pre_author author">
+		  					<p>By:</p>
+		  					<p>Posted on:</p>
+		  				</div>
+		  				<div class="author">
+		  					<a href="{% url 'profile' %}"><p>{{ post.author }}</p></a>
+		  					<p>{{ post.date_posted|date:"F d, Y" }}</p>
+		  				</div>
+		  			</div>
+		   		</div>
+		   </div>
+		  	<div style="padding: 15px; width: 100%; text-align: justify; color: #154;">
+		  		<pre style="text-overflow: clip; overflow: hidden; white-space: pre-wrap;">
+		  			<p>{{ post.content}}</p>
+		  		</pre>
+		  	</div>
+		</div>
+	  {% endfor %}
+
+	  {% if is_paginated %}
+		{% if page_obj.has_previous %}
+			<a href="?page=1" style="color: crimson;">First</a>
+			<a href="?page={{ page_obj.previous_page_number }}" style="color: crimson;">Previous</a>
+		{% endif %}
+
+		{% for num in page_obj.paginator.page_range %}
+			{% if page_obj.number == num %}
+			<a href="?page={{ num }}" style="color: rgb(83, 0, 17);">{{ num }}</a>
+			{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'-3' %}
+			{% endif %}
+		{% endfor %}
+
+		{% if page_obj.has_next %}
+			<a href="?page={{ page_obj.next_page_number }}" style="color: crimson;">Next</a>
+			<a href="?page={{ page_obj.paginator.num_pages }}" style="color: crimson;">Last</a>
+		{% endif %}
+
+	  {% endif %}
+	  <br>
+	  <br>
+{% endblock content %}

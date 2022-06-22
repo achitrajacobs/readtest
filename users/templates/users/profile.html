@@ -1,0 +1,38 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+	 <form method="POST" enctype="multipart/form-data" style="background-color: rgba(230, 230, 250, 0.378); height: 100%;">
+	 			{% csrf_token %}
+	 			<fieldset style="text-align: center; padding: 15px;
+				 ">
+					<legend class="edit_legend">Profile Info</legend>
+	 				<div style="margin: 0 auto; width: 70px; height: 70px; border-radius: 50%; overflow: hidden;">
+						<img src="{{ user.profile.image.url }}" style="height: 100%;">
+					</div>
+					<h3>Current Info</h3>
+						<p>{{ user.username }}</p>
+						<p>{{ user.email }}</p>
+					 <br>
+						<fieldset style="margin: 0 auto; text-align: justify;">
+							<br />
+						   <legend class="edit_legend">
+								Edit info
+						   </legend>
+							{{ u_form|crispy }}
+							   <br>
+						   {{ p_form|crispy }}
+							   <br>
+					   <div>
+						   <button type="submit">
+							   Update
+						   </button>
+					   </div>
+						</fieldset>
+		 		</fieldset>
+
+				 <br><br>
+	 		
+	 	</form>
+
+{% endblock content %}

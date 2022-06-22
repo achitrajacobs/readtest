@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<link rel="shortcut icon" href="{% static 'blog/favicon.png' %}" type="image/x-icon">
+	{% if title %}
+		<title>Django Blog - {{ title }}</title>
+	{% else %}
+		<title>Happy 10 of July</title>
+	{% endif %}
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/main_sub10.css' %}" />
+	<script src="{% static 'blog/jquery-3.6.0.js' %}"></script>
+	<script src="{% static 'blog/main111.js' %}"></script>
+	<script>
+		
+	</script>
+
+</head>
+	<header id="header">
+		<div class="navLink">
+			<button id="toggle_sideNav" >
+				&#9776;
+		   </button>
+		   <button id="toggle_sideNav1" disabled style="background: transparent; color: honeydew;">
+			   &#9776;
+		  </button>
+			<a href="{% url 'blog-home' %}">Home 🏠</a>
+			<a href="{% url 'blog-about' %}">Timeline 🕒</a>
+
+			{% if user.is_authenticated %}
+			<button id="user_account_toggle">Account 👼</button>
+			<p style="float: right; padding: 10px; margin-top: 0px; margin-right: 20px; font-size: small;">
+				<a href="{% url 'profile' %}" style="color: cyan; text-decoration: underline;">
+					<i><tt><b>{{ user.username }}</b></tt></i>
+				</a>
+			</p>
+
+			{% else %}
+		   	<div id="login_reg" style="float: right; margin-top: 15px;">
+				<a href="{% url 'login' %}">Log In</a> &nbsp; | &nbsp;
+				<a href="{% url 'register' %}">Register</a>
+			</div>
+			{% endif %}
+		</div>
+	</header>
+<main>
+<body onload="displayBot(), resizeBot()">
+	<div id="body">
+		<div class="sideNav" style="z-index: 3;" id="sideNav">
+			<button id="close"> &#9776;</button>
+			<div id="sideNav_title">
+				<p id="cake"> &#127874; </p>
+				<p style="color: rgb(109, 0, 0); font-weight: 1000; width: 150px; background: lavender; 
+				padding: 30px 0px; font-family: monospace;">
+					Happy 10<sup>th</sup> of July
+				</p>
+			</div>
+			<div style="padding-top: 50px; width: 150px;" id="side_cont_container">
+				
+				<div class="sideNav_content">
+					Gallery <span id="right_icon">&#127802;</span>
+				</div>
+				<div class="sideNav_content">
+					Date <span id="right_icon">&#128197;</span>
+				</div>
+				<div class="sideNav_content">
+					Location <span id="right_icon">&target;</span>
+				</div>
+				<div class="sideNav_content">
+					The bud <span id="right_icon">&#128102;</span>
+				</div>
+				<div class="sideNav_content">
+					Requisites <span id="right_icon">&#127850;</span>
+				</div>
+				<div class="sideNav_content">
+					Gift <span id="right_icon">&#127856;&#127851;&#127849;</span>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			{% if messages %}
+				{% for message in messages %}
+				<div class="message">
+					{{ message }}
+				</div>
+				{% endfor %}
+			{% endif %}
+			{% block content %}{% endblock %}
+		</div>
+		<div id="right_nav" style="z-index: 2;">
+			<h2 style="text-indent: 15px;">New</h2>
+			<hr style="margin-top: -15px;">
+			<br>
+			<div class="sideBtns">
+				<button>Events</button>
+				<button>Announcements</button>
+				<button>Game zone</button>
+				<button>Ads</button>
+
+			</div>
+		</div>
+		<div id="min_menu" style="z-index: 2;">
+			<a href="{% url 'post-create' %}"><button>New</button></a><br>
+			<a href="{% url 'logout' %}"><button>Log Out</button></a><br>
+			<a href="{% url 'profile' %}"><button>Profile</button></a><br>
+		</div>
+		<br>
+		<br>
+	</div>
+	<div id="background">
+
+	</div>
+	<div id="botOpen" onclick="displayBot()">
+		<div id="botOpenIcon">
+		</div>
+	</div>
+	<div id="botFrame">
+		<div style="background-color: aquamarine; color: black; height: 30px;">
+			<button class="tBtn tBtn1" onclick="closeBot()" >&times;</button>
+			<button class="tBtn" onclick="resizeBot()" style="padding: 2px 5px 8px 5px;">&squ;</button> &nbsp;&nbsp;
+			
+		</div>
+		<iframe src="https://botmake.io/Achira" frameborder="0" style="height: 100%; width: 100%;">
+	
+		</iframe>
+		
+		
+	</div>
+
+</body>
+</main>
+<footer>
+	<div id="footer">
+		<div>
+			<li><a href="">Facebook</a></li>
+			<li><a href="">Twitter</a></li>
+			<li><a href="">Intagram</a></li>
+			<li><a href="">Whatsapp</a></li>
+			<br>
+		</div>
+		<div>
+			<a href="">Game Zone</a>
+		</div>
+	</div>
+	<div id="copyright">
+		&copy; Copyright  Jacob 2022 | All rights reserved.
+	</div>
+</footer>
+</html>
